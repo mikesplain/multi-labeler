@@ -4,7 +4,7 @@ import * as github from '@actions/github'
 
 export interface StatusCheck {
   context: string
-  state: 'success' | 'failure'
+  state: 'success' | 'failure' | 'pending'
   description?: string
   url?: string
 }
@@ -54,6 +54,16 @@ export async function checks(
           typeof check.description === 'string'
             ? check.description
             : check.description?.success
+      }
+    } else if (check.description?.pending) {
+      return {
+        context: check.context,
+        url: check.url,
+        state: 'pending',
+        description:
+          typeof check.description === 'string'
+            ? check.description
+            : check.description?.pending
       }
     } else {
       return {
