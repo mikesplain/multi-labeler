@@ -82,10 +82,10 @@ function checks(client, config, labels) {
                 return {
                     context: check.context,
                     url: check.url,
-                    state: 'failure',
+                    state: 'pending',
                     description: typeof check.description === 'string'
                         ? check.description
-                        : (_b = check.description) === null || _b === void 0 ? void 0 : _b.failure
+                        : (_b = check.description) === null || _b === void 0 ? void 0 : _b.pending
                 };
             }
         });
@@ -181,7 +181,8 @@ const Check = t.intersection([
             t.string,
             t.partial({
                 success: t.string,
-                failure: t.string
+                failure: t.string,
+                pending: t.string
             })
         ]),
         labels: t.partial({
