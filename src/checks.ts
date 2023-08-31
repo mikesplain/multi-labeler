@@ -59,7 +59,9 @@ export async function checks(
       return {
         context: check.context,
         url: check.url,
-        state: 'pending',
+        state: typeof check.description === 'string'
+            ? 'failure'
+            : check.description?.pending ? 'pending' : 'failure',
         description:
           typeof check.description === 'string'
             ? check.description

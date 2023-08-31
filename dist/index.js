@@ -67,7 +67,7 @@ function checks(client, config, labels) {
             return [];
         }
         return config.checks.map(check => {
-            var _a, _b;
+            var _a, _b, _c;
             if (is(check, labels)) {
                 return {
                     context: check.context,
@@ -82,10 +82,12 @@ function checks(client, config, labels) {
                 return {
                     context: check.context,
                     url: check.url,
-                    state: 'pending',
+                    state: typeof check.description === 'string'
+                        ? 'failure'
+                        : ((_b = check.description) === null || _b === void 0 ? void 0 : _b.pending) ? 'pending' : 'failure',
                     description: typeof check.description === 'string'
                         ? check.description
-                        : (_b = check.description) === null || _b === void 0 ? void 0 : _b.pending
+                        : (_c = check.description) === null || _c === void 0 ? void 0 : _c.pending
                 };
             }
         });
