@@ -49,7 +49,8 @@ const Check = t.intersection([
       t.string,
       t.partial({
         success: t.string,
-        failure: t.string
+        failure: t.string,
+        pending: t.string
       })
     ]),
     labels: t.partial({
