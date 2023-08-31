@@ -55,7 +55,7 @@ export async function checks(
             ? check.description
             : check.description?.success
       }
-    } else if (check.description?.pending) {
+    } else {
       return {
         context: check.context,
         url: check.url,
@@ -64,16 +64,6 @@ export async function checks(
           typeof check.description === 'string'
             ? check.description
             : check.description?.pending
-      }
-    } else {
-      return {
-        context: check.context,
-        url: check.url,
-        state: 'failure',
-        description:
-          typeof check.description === 'string'
-            ? check.description
-            : check.description?.failure
       }
     }
   })
